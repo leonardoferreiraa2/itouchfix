@@ -1,0 +1,1 @@
+componentes que serão usados em mais de uma página 
