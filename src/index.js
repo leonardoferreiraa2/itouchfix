@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import Signin from './pages/Signin'
+import Input from './pages/Login'
 
 export default function App() {
   return (
