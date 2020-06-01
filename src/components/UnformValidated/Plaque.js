@@ -20,7 +20,7 @@ function get_plaque(value) {
       partStr(value, 3) + partStr(value, 4);
   };
   
-  return mask;
+  return mask.toUpperCase();
 };
 
 function partStr(value, part) {

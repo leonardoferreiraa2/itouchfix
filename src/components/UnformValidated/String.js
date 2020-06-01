@@ -9,11 +9,11 @@ import Validations from './Validations';
 
 
 function get_string_up(value) {
-  return value;
+  return value.toUpperCase();
 };
 
 function get_string_low(value) {
-  return value;
+  return value.toLowerCase();
 };
 
 function get_password(value) {

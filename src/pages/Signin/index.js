@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
-import {TouchableOpacity, Text} from 'react-native';
-import {Form} from '@unform/mobile';
+import { TouchableOpacity, Text} from 'react-native';
+import { Form } from '@unform/mobile';
 import Input from '../../components/UnformValidated';
 
 import {Scope} from '@unform/core';
@@ -22,6 +22,12 @@ export default function Signin() {
   }
 
 /* 
+  PLACEHOLDER
+  configurações inputs
+  criar label
+  retornar email como ***
+  validar email
+
   FALTAM: 
     cnpj
     cpf
@@ -40,11 +46,11 @@ export default function Signin() {
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
       <Text>Nome</Text>
-      <Input name="nome" type="phone" />
+      <Input name="nome" type="phone-ddd" />
       <Text>Email</Text>
-      <Input name="email" autoCapitalize='characters' type="string-low" />
+      <Input name="email" type="string-low" />
       <Text>Número</Text>
-      <Input name="numero" keyboardType="numeric" type="general" />
+      <Input name="numero" type="general" />
       <Scope path="endereco">
         <Text>UF</Text>
         <Input name="uf" />

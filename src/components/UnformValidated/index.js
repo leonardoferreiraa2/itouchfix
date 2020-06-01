@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { TextInput } from 'react-native';
+import { Text, TextInput } from 'react-native';
 import { useField } from '@unform/core';
 
-import Func from './Validations';
+import Fun from './Validations';
 
 function Input({name, ...rest}) {
   const inputRef = useRef(null);
   const {fieldName, registerField, defaultValue, error} = useField(name);
-
+  
   const [maskValue, setMaskValue] = useState('');
 
   useEffect(() => {
@@ -41,19 +41,48 @@ function Input({name, ...rest}) {
     }
   }, [maskValue]);
 
+
+  // const [secureTextEntry, setSecureTextEntry] = useState('');
+  // const [keyboardType, setKeyboardType] = useState('');
+  // const [autoCapitalize, setAutoCapitalize] = useState('');
+  // const [maxLength, setMaxLength] = useState('');
+  // useEffect(() => {
+  //   setSecureTextEntry(getConfig('secureTextEntry'));
+  //   setKeyboardType(getConfig('keyboardType'));
+  //   setAutoCapitalize(getConfig('autoCapitalize')); 
+  //   setMaxLength(getConfig('maxLength')); 
+  // }, []);
+
+  const getConfig = nameConfig => {
+    const type = {...rest}.type !== undefined ? 
+      {...rest}.type.toUpperCase() : '';
+  
+    if (Object.keys(Fun.types).indexOf(type) === -1) return null;
+
+    const configs = Fun.types[type].configInput;
+    const config = configs[nameConfig];
+
+    return config !== null ? config : null;
+  };
+
   const getValidation = value => {
     const props = {
       type: {...rest}.type,
       value: value,
     };
 
-    value = Func.getMaskValue(props)
-    return value;
+    return Fun.getMaskValue(props);
   };
 
   return (
     <TextInput
       ref={inputRef}
+
+      secureTextEntry={getConfig('secureTextEntry')} 
+      keyboardType={getConfig('keyboardType')} 
+      autoCapitalize={getConfig('autoCapitalize')} 
+      maxLength={getConfig('maxLength')} 
+
       defaultValue={defaultValue}
       onChangeText={value => {
         setMaskValue(getValidation(value));
@@ -63,5 +92,6 @@ function Input({name, ...rest}) {
     />
   );
 }
+
 
 export default Input;
