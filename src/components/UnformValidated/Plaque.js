@@ -3,7 +3,7 @@
   AAA-9A99
 */
 
-import Func from './Validations';
+import createCommons from './Commons';
 
 
 function get_plaque(value) {
@@ -24,6 +24,8 @@ function get_plaque(value) {
 };
 
 function partStr(value, part) {
+  const Func = createCommons();
+
   if (part == 1) {
     // três primeiros dígitos
     return Func.filterValue(value, 'only-letter', 0, 3);

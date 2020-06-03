@@ -10,10 +10,12 @@
   99999-9999
 */
 
-import Func from './Validations';
+import createCommons from './Commons';
 
 
 function get_phone(value) {
+  const Func = createCommons();
+
   const num = Func.filterValue(value, 'only-number');
   const len = num.length;
   let mask = undefined;
@@ -30,6 +32,7 @@ function get_phone(value) {
 };
 
 function get_phone_ddd(value) {
+  const Func = createCommons();
   const num = Func.filterValue(value, 'only-number');
   const len = num.length;
   let mask = undefined;

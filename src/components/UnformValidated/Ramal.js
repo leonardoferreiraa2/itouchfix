@@ -2,10 +2,12 @@
   999-9999
 */
 
-import Func from './Validations';
+import createCommons from './Commons';
 
 
 function get_ramal(value) {
+  const Func = createCommons();
+
   const num = Func.filterValue(value, 'only-number');
   const len = num.length;
   let mask = undefined;

@@ -15,10 +15,11 @@ export default function Input(){
     <View>
       <Text>Login</Text>
       <TextInput 
-        onChangeText={value => {
-          changeValor(value);
-        }}
-        value={valor}
+        autoCapitalize="characters"
+        // onChangeText={value => {
+        //   changeValor(value);
+        // }}
+        //value={valor}
       />
     </View>
   )

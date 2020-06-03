@@ -3,7 +3,7 @@
   99.999.999/9999-99
 */
 
-import Validations from './Validations';
+import createCommons from './Commons';
 
 
 function get_cnpj(value) {

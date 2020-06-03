@@ -1,9 +1,9 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 import { TouchableOpacity, Text} from 'react-native';
 import { Form } from '@unform/mobile';
 import Input from '../../components/UnformValidated';
 
-import {Scope} from '@unform/core';
+import { Scope } from '@unform/core';
 
 // const initialData = {
 //   email: 'gustavo.ferreiraa2@gmail.com',
@@ -17,16 +17,18 @@ export default function Signin() {
 
   function handleSubmit(data, {reset}) {
     console.log(data);
-    // { email: 'test@example.com', password: '123456' }
     reset();
   }
 
 /* 
-  PLACEHOLDER
-  configurações inputs
-  criar label
-  retornar email como ***
-  validar email
+  configurações inputs ver callback ou push no {...rest}
+  mudar validações já feitas para padrao factory
+  terminar outros inputs
+  
+  melhorar teclados para cada tipo de input
+  len mínimo, duplicidade, duplicidade combinada, requerido
+  validações nos detalhes: framework formulários access
+  styles icones e label
 
   FALTAM: 
     cnpj
@@ -41,21 +43,19 @@ export default function Signin() {
     phone
     phone-ddd
     ramal
+
+    PLACEHOLDER
+    criar label
 */
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
-      <Text>Nome</Text>
-      <Input name="nome" type="phone-ddd" />
-      <Text>Email</Text>
-      <Input name="email" type="string-low" />
-      <Text>Número</Text>
-      <Input name="numero" type="general" />
+      <Input name="nome" type="string-up" label="Nome" />
+      <Input name="email" type="email" label="Email" />
+      <Input name="numero" type="general" label="Número" />
       <Scope path="endereco">
-        <Text>UF</Text>
-        <Input name="uf" />
-        <Text>Cidade</Text>
-        <Input name="cidade" />
+        <Input name="uf" label="UF" />
+        <Input name="cidade" label="Cidade" />
       </Scope>
 
       <TouchableOpacity onPress={() => formRef.current.submitForm()}>

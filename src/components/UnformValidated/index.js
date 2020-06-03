@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Text, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { useField } from '@unform/core';
 
-import Fun from './Validations';
+import createValidations from './Validations';
 
 function Input({name, ...rest}) {
   const inputRef = useRef(null);
   const {fieldName, registerField, defaultValue, error} = useField(name);
-  
+
   const [maskValue, setMaskValue] = useState('');
 
   useEffect(() => {
@@ -41,31 +41,22 @@ function Input({name, ...rest}) {
     }
   }, [maskValue]);
 
-
-  // const [secureTextEntry, setSecureTextEntry] = useState('');
-  // const [keyboardType, setKeyboardType] = useState('');
-  // const [autoCapitalize, setAutoCapitalize] = useState('');
-  // const [maxLength, setMaxLength] = useState('');
-  // useEffect(() => {
-  //   setSecureTextEntry(getConfig('secureTextEntry'));
-  //   setKeyboardType(getConfig('keyboardType'));
-  //   setAutoCapitalize(getConfig('autoCapitalize')); 
-  //   setMaxLength(getConfig('maxLength')); 
-  // }, []);
-
   const getConfig = nameConfig => {
+    const Fun = createValidations();
+    const types = Fun.types;
     const type = {...rest}.type !== undefined ? 
       {...rest}.type.toUpperCase() : '';
   
-    if (Object.keys(Fun.types).indexOf(type) === -1) return null;
+    if (Object.keys(types).indexOf(type) === -1) return null;
 
-    const configs = Fun.types[type].configInput;
+    const configs = types[type].configInput;
     const config = configs[nameConfig];
 
     return config !== null ? config : null;
   };
 
   const getValidation = value => {
+    const Fun = createValidations();
     const props = {
       type: {...rest}.type,
       value: value,
@@ -74,22 +65,30 @@ function Input({name, ...rest}) {
     return Fun.getMaskValue(props);
   };
 
+  const config = {...rest};
+  const keys = Object.keys(config);
+  
+  Object.assign(config, { secureTextEntry: getConfig('secureTextEntry') })
+  Object.assign(config, { keyboardType: getConfig('keyboardType') })
+  Object.assign(config, { autoCapitalize: getConfig('autoCapitalize') })
+  Object.assign(config, { maxLength: getConfig('maxLength') })
+
+  if (keys.indexOf('placeholder') === -1) 
+    Object.assign(config, { placeholder: getConfig('placeholder') })
+
   return (
-    <TextInput
-      ref={inputRef}
-
-      secureTextEntry={getConfig('secureTextEntry')} 
-      keyboardType={getConfig('keyboardType')} 
-      autoCapitalize={getConfig('autoCapitalize')} 
-      maxLength={getConfig('maxLength')} 
-
-      defaultValue={defaultValue}
-      onChangeText={value => {
-        setMaskValue(getValidation(value));
-      }}
-      value={maskValue}
-      {...rest}
-    />
+    <View>
+      <Text>{ {...rest}.label }</Text>
+      <TextInput
+        ref={inputRef}
+        defaultValue={defaultValue}
+        onChangeText={value => {
+          setMaskValue(getValidation(value));
+        }}
+        value={maskValue}
+        {...config}
+      />
+    </View>
   );
 }
 

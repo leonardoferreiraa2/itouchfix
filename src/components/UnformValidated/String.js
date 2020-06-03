@@ -1,11 +1,15 @@
 /*
-  @a = letras minísculas
-  @A = letras maiúsculas
-  @* = password
-  email
+  string-low = letras minísculas
+  string-up = letras maiúsculas
+  password = password
+  email = email
+
+  retornar password como ***
+  validar email
+
 */
 
-import Validations from './Validations';
+import createCommons from './Commons';
 
 
 function get_string_up(value) {

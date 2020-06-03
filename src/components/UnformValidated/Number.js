@@ -6,10 +6,11 @@
   card = 9999 9999 9999 9999
 */
 
-import Func from './Validations';
+import createCommons from './Commons';
 
 
 function get_general(value) {
+  const Func = createCommons();
   return Func.filterValue(value, 'only-number');
 };
 
