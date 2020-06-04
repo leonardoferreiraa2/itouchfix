@@ -18,7 +18,7 @@ function get_phone(value) {
 
   const num = Func.filterValue(value, 'only-number');
   const len = num.length;
-  let mask = undefined;
+  let mask = '';
 
   if (len <= 4) {
     mask = num;
@@ -33,11 +33,12 @@ function get_phone(value) {
 
 function get_phone_ddd(value) {
   const Func = createCommons();
+
   const num = Func.filterValue(value, 'only-number');
   const len = num.length;
-  let mask = undefined;
+  let mask = '';
 
-  if (len == 0) return;
+  if (len === 0) return '';
 
   if (len <= 2) {
     mask =

@@ -21,7 +21,7 @@ export default function Signin() {
   }
 
 /* 
-  configurações inputs ver callback ou push no {...rest}
+
   mudar validações já feitas para padrao factory
   terminar outros inputs
   
@@ -29,6 +29,7 @@ export default function Signin() {
   len mínimo, duplicidade, duplicidade combinada, requerido
   validações nos detalhes: framework formulários access
   styles icones e label
+  ver re-renders
 
   FALTAM: 
     cnpj
@@ -50,7 +51,7 @@ export default function Signin() {
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
-      <Input name="nome" type="string-up" label="Nome" />
+      <Input name="nome" type="phone-ddd" label="Nome" />
       <Input name="email" type="email" label="Email" />
       <Input name="numero" type="general" label="Número" />
       <Scope path="endereco">

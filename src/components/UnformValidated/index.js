@@ -41,22 +41,9 @@ function Input({name, ...rest}) {
     }
   }, [maskValue]);
 
-  const getConfig = nameConfig => {
+  function getValidation(value) {
     const Fun = createValidations();
-    const types = Fun.types;
-    const type = {...rest}.type !== undefined ? 
-      {...rest}.type.toUpperCase() : '';
-  
-    if (Object.keys(types).indexOf(type) === -1) return null;
 
-    const configs = types[type].configInput;
-    const config = configs[nameConfig];
-
-    return config !== null ? config : null;
-  };
-
-  const getValidation = value => {
-    const Fun = createValidations();
     const props = {
       type: {...rest}.type,
       value: value,
@@ -65,16 +52,29 @@ function Input({name, ...rest}) {
     return Fun.getMaskValue(props);
   };
 
-  const config = {...rest};
-  const keys = Object.keys(config);
-  
-  Object.assign(config, { secureTextEntry: getConfig('secureTextEntry') })
-  Object.assign(config, { keyboardType: getConfig('keyboardType') })
-  Object.assign(config, { autoCapitalize: getConfig('autoCapitalize') })
-  Object.assign(config, { maxLength: getConfig('maxLength') })
+  function getConfig(refConfig, nameConfig) {
+    if (refConfig.nameConfig) return
 
-  if (keys.indexOf('placeholder') === -1) 
-    Object.assign(config, { placeholder: getConfig('placeholder') })
+    const Fun = createValidations();
+    const types = Fun.types;
+    const type = refConfig.type !== undefined ? 
+      refConfig.type.toUpperCase() : '';
+  
+    if (Object.keys(types).indexOf(type) === -1) return null;
+
+    const configs = types[type].configInput;
+    const config = configs[nameConfig];
+
+    Object.assign(refConfig, { [nameConfig]: config })
+  };
+
+  const refConfig = {...rest};
+  
+  getConfig(refConfig, 'secureTextEntry');
+  getConfig(refConfig, 'keyboardType');
+  getConfig(refConfig, 'autoCapitalize');
+  getConfig(refConfig, 'maxLength');
+  getConfig(refConfig, 'placeholder');
 
   return (
     <View>
@@ -86,7 +86,7 @@ function Input({name, ...rest}) {
           setMaskValue(getValidation(value));
         }}
         value={maskValue}
-        {...config}
+        {...refConfig}
       />
     </View>
   );
