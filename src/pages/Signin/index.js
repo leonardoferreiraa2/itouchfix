@@ -30,6 +30,7 @@ export default function Signin() {
   validações nos detalhes: framework formulários access
   styles icones e label
   ver re-renders
+  melhorar criação de label
 
   FALTAM: 
     cnpj
@@ -44,9 +45,6 @@ export default function Signin() {
     phone
     phone-ddd
     ramal
-
-    PLACEHOLDER
-    criar label
 */
 
   return (
