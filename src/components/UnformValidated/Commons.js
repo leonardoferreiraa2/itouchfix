@@ -1,5 +1,31 @@
+import React from 'react';
+import { Platform } from 'react-native';
+
 
 function createCommons() {
+  const configTextCase = {
+    secureTextEntry: Platform.OS === 'ios' ? false : true, 
+    keyboardType: Platform.OS === 'ios' ? null : 'visible-password',
+    autoCapitalize: 'characters', 
+  };
+
+  const num_with_five = {
+    maxLength: 5,
+    keyboardType: 'numeric',
+    placeholder: 'hh:mm',
+  };
+
+  const num_with_eigth = {
+    maxLength: 8,
+    keyboardType: 'numeric',
+    placeholder: 'hh:mm:ss',
+  };
+
+  const lblOrientacao = {
+    lblLeft: '',
+    lblRight: '',
+  };
+
   const letters_numbers = {
     'only-letter': 'abcdefghijklmnopqrstuvwxyz'.toUpperCase(),
     'only-number': '0123456789',
@@ -20,8 +46,12 @@ function createCommons() {
   };
 
   return {
+    configTextCase,
+    num_with_five,
+    num_with_eigth,
+    lblOrientacao,
     letters_numbers,
-    filterValue
+    filterValue,
   }
 }
 

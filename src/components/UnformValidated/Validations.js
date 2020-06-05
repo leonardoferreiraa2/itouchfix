@@ -1,6 +1,6 @@
 
 import React from 'react';
-import createFunctions from './SetFunctions';
+import createFunctions from './Functions';
 import createTypes from './Types';
 
 function createValidations() {

@@ -22,7 +22,9 @@ export default function Signin() {
 
 /* 
 
-  mudar validações já feitas para padrao factory
+  separar os types dos inputs
+  separar funções secundárias dos inputs 
+
   terminar outros inputs
   
   melhorar teclados para cada tipo de input
@@ -53,7 +55,7 @@ export default function Signin() {
       <Input name="email" type="email" label="Email" />
       <Input name="numero" type="general" label="Número" />
       <Scope path="endereco">
-        <Input name="uf" label="UF" />
+        <Input name="cep" type="cep" label="CEP" />
         <Input name="cidade" label="Cidade" />
       </Scope>
 
