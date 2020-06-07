@@ -1,40 +1,21 @@
-/* 
-  999-9999
-*/
 
 import createCommons from '../Commons';
+import createTypesRamal from './types';
 
 
 function createRamal() {
-  function typesRamal() {
+  function get_ramal(value) {
     const Commons = createCommons();
-    return {
-      'RAMAL': {
-        func: 'ramal',
-        configInput: { 
-          ...Commons.lblOrientacao, 
-          maxLength: 8,
-          keyboardType: 'numeric',
-          placeholder: '000-0000',
-        }
-      }
-    }
+  
+    const num = Commons.filterValue(value, 'only-number');
+    const typeMask = Commons.getObjKeyForIndex(typesRamal(), 0);
+    const mask = Commons.formatMask(num, typesRamal()[typeMask].mask);
+
+    return mask;
   };
 
-  function get_ramal(value) {
-    const Func = createCommons();
-  
-    const num = Func.filterValue(value, 'only-number');
-    const len = num.length;
-    let mask = undefined;
-  
-    if (len <= 3) {
-      mask = num;
-    } else if (len <= 7) {
-      mask = num.substr(0, 3) + '-' + num.substr(3, 4);
-    }
-    
-    return mask;
+  function typesRamal() {
+    return createTypesRamal().getTypesRamal;
   };
 
   return {

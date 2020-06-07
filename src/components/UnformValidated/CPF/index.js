@@ -1,29 +1,20 @@
-/* 
-  CPF
-  999.999.999-99
-*/
 
 import createCommons from '../Commons';
-
+import createTypesCPF from './types';
 
 function createCPF() {
-  function typesCPF() {
+  function get_cpf(value) {
     const Commons = createCommons();
-    return {
-      'CPF': {
-        func: 'cpf',
-        configInput: { 
-          ...Commons.lblOrientacao,
-          maxLength: 14,
-          keyboardType: 'numeric',
-          placeholder: '000.000.000-00',
-        },
-      }
-    }
+  
+    const num = Commons.filterValue(value, 'only-number');
+    const typeMask = Commons.getObjKeyForIndex(typesCPF(), 0);
+    const mask = Commons.formatMask(num, typesCPF()[typeMask].mask);
+
+    return mask;
   };
 
-  function get_cpf(value) {
-    return value;
+  function typesCPF() {
+    return createTypesCPF().getTypesCPF;
   };
 
   return {

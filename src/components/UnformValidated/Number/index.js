@@ -7,58 +7,12 @@
 */
 
 import createCommons from '../Commons';
-
+import createTypesNumber from './types';
 
 function createNumber() {
-  function typesNumber() {
-    const Commons = createCommons();
-    return {
-      'GENERAL': {
-        func: 'general',
-        configInput: { 
-          ...Commons.lblOrientacao, 
-          keyboardType: 'numeric',
-          placeholder: '0',
-        },
-      }, 
-      'DECIMAL': {
-        func: 'decimal',
-        configInput: { 
-          ...Commons.lblOrientacao, 
-          keyboardType: Platform.OS === 'ios' ? 'decimal-pad' : 'numeric', 
-          placeholder: '0.00',
-        },
-      }, 
-      'CURRENCY': {
-        func: 'currency',
-        configInput: { 
-          ...Commons.lblOrientacao, 
-          keyboardType: 'numeric',
-          placeholder: '$0.00',
-        },
-      }, 
-      'PERCENT': {
-        func: 'percent',
-        configInput: { 
-          ...Commons.lblOrientacao, 
-          keyboardType: Platform.OS === 'ios' ? 'decimal-pad' : 'numeric', 
-          placeholder: '%0.00', 
-        },
-      }, 
-      'CARD': {
-        func: 'card',
-        configInput: { 
-          ...Commons.lblOrientacao, 
-          keyboardType: 'numeric',
-          placeholder: '0000 0000 0000 0000',
-        },
-      }
-    }
-  };
-
   function get_general(value) {
-    const Func = createCommons();
-    return Func.filterValue(value, 'only-number');
+    const Commons = createCommons();
+    return Commons.filterValue(value, 'only-number');
   };
   
   function get_decimal(value) {
@@ -74,7 +28,17 @@ function createNumber() {
   };
   
   function get_card(value) {
-    return value;
+    const Commons = createCommons();
+  
+    const num = Commons.filterValue(value, 'only-number');
+    const typeMask = Commons.getObjKeyForIndex(typesNumber(), 4);
+    const mask = Commons.formatMask(num, typesNumber()[typeMask].mask);
+
+    return mask;
+  };
+
+  function typesNumber() {
+    return createTypesNumber().getTypesNumber;
   };
 
   return {

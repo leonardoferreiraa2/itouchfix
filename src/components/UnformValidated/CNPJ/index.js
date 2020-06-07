@@ -1,31 +1,23 @@
-/*
-  CNPJ
-  99.999.999/9999-99
-*/
 
 import createCommons from '../Commons';
+import createTypesCNPJ from './types';
 
 
 function createCNPJ() {
-  function typesCNPJ() {
-    const Commons = createCommons();
-    return {
-      'CNPJ': {
-        func: 'cnpj',
-        configInput: { 
-          ...Commons.lblOrientacao,
-          maxLength: 18,
-          keyboardType: 'numeric',
-          placeholder: '00.000.000/0000-00',
-        },
-      }
-    }
-  };
-
   function get_cnpj(value) {
-    return value;
+    const Commons = createCommons();
+  
+    const num = Commons.filterValue(value, 'only-number');
+    const typeMask = Commons.getObjKeyForIndex(typesCNPJ(), 0);
+    const mask = Commons.formatMask(num, typesCNPJ()[typeMask].mask);
+
+    return mask;
   };
 
+  function typesCNPJ() {
+    return createTypesCNPJ().getTypesCNPJ;
+  };
+  
   return {
     get_cnpj,
     typesCNPJ

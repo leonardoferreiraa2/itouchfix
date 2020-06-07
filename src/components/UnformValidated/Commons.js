@@ -9,18 +9,6 @@ function createCommons() {
     autoCapitalize: 'characters', 
   };
 
-  const num_with_five = {
-    maxLength: 5,
-    keyboardType: 'numeric',
-    placeholder: 'hh:mm',
-  };
-
-  const num_with_eigth = {
-    maxLength: 8,
-    keyboardType: 'numeric',
-    placeholder: 'hh:mm:ss',
-  };
-
   const lblOrientacao = {
     lblLeft: '',
     lblRight: '',
@@ -45,13 +33,35 @@ function createCommons() {
     return newValue;
   };
 
+  function formatMask(value, mask) {
+    let newValue = '';
+    let l = 0;
+
+    for (let i = 0; i < mask.length; i++) {
+      if (l >= value.length || value === '') { break; }
+      if (mask[i] != 9) {
+        newValue += mask[i];
+      } else {
+        newValue += value[l];
+        l++;
+      };
+    };
+
+    return newValue;
+  };
+
+  function getObjKeyForIndex(objTypes, i) {
+    const index = Object.keys(objTypes); // get keys do obj e converte em array
+    return String(index[i]); // get o index do array, conforme passado
+  };
+
   return {
     configTextCase,
-    num_with_five,
-    num_with_eigth,
     lblOrientacao,
     letters_numbers,
     filterValue,
+    formatMask,
+    getObjKeyForIndex,
   }
 }
 

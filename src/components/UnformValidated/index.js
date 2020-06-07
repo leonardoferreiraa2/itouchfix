@@ -65,7 +65,7 @@ function Input({name, ...rest}) {
     const configs = types[type].configInput;
     const config = configs[nameConfig];
 
-    Object.assign(refConfig, { [nameConfig]: config })
+    Object.assign(refConfig, { [nameConfig]: config });
   };
 
   const refConfig = {...rest};

@@ -20,13 +20,7 @@ export default function Signin() {
     reset();
   }
 
-/* 
-
-  separar os types dos inputs
-  separar funções secundárias dos inputs 
-
-  terminar outros inputs
-  
+/*  
   melhorar teclados para cada tipo de input
   len mínimo, duplicidade, duplicidade combinada, requerido
   validações nos detalhes: framework formulários access
@@ -35,23 +29,27 @@ export default function Signin() {
   melhorar criação de label
 
   FALTAM: 
-    cnpj
-    cpf
-    date
     number
     string
+    validar cpf
+    validar cnpj
+    validar data
+    validar hora
   
   FEITOS:
-    plaque
     cep
     phone
     phone-ddd
     ramal
+    plaque
+    cnpj
+    cpf
+    date
 */
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
-      <Input name="nome" type="phone-ddd" label="Nome" />
+      <Input name="data" type="[hh]:mm:ss" label="Data" />
       <Input name="email" type="email" label="Email" />
       <Input name="numero" type="general" label="Número" />
       <Scope path="endereco">

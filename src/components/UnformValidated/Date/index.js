@@ -1,95 +1,29 @@
-/* 
-  HH:MM
-  HH:MM:SS
-  
-  [HH]:MM
-  [HH]:MM:SS
-
-  dd/mm/yyyy
-
-  dd/mm/yyyy hh:mm
-  dd/mm/yyyy hh:mm:ss
-*/
 
 import createCommons from '../Commons';
+import createTypesDate from './types';
 
 
 function createDate() {
-  function typesDate() {
-    const Commons = createCommons();
-    return {
-      'HH:MM': {
-        func: 'hh_mm',
-        configInput: { ...Commons.lblOrientacao, ...Commons.num_with_five },
-      },
-      'HH:MM:SS': {
-        func: 'hh_mm_ss',
-        configInput: { ...Commons.lblOrientacao, ...Commons.num_with_eigth },
-      }, 
-      '[HH]:MM': {
-        func: 'dur_hh_mm',
-        configInput: { ...Commons.lblOrientacao, ...Commons.num_with_five },
-      },         
-      '[HH]:MM:SS': {
-        func: 'dur_hh_mm_ss',
-        configInput: { ...Commons.lblOrientacao, ...Commons.num_with_eigth },
-      },             
-      'DD/MM/YYYY': {
-        func: 'dd_mm_yy',
-        configInput: { 
-          ...Commons.lblOrientacao,
-          maxLength: 10,
-          keyboardType: 'numeric',
-          placeholder: 'dd/mm/yyyy',
-        },
-      },
-      'DD/MM/YYYY HH:MM': {
-        func: 'dd_mm_yy_hh_mm',
-        configInput: { 
-          ...Commons.lblOrientacao,
-          maxLength: 16,
-          keyboardType: 'numeric',
-          placeholder: 'dd/mm/yyyy hh:mm',
-        },
-      },
-      'DD/MM/YYYY HH:MM:SS': {
-        func: 'dd_mm_yy_hh_mm_ss',
-        configInput: { 
-          ...Commons.lblOrientacao,
-          maxLength: 19,
-          keyboardType: 'numeric',
-          placeholder: 'dd/mm/yyyy hh:mm:ss',
-        }
-      }  
-    }
+  function get_hh_mm(value) { return getValueDate(value, 0); };
+  function get_hh_mm_ss(value) { return getValueDate(value, 1); };
+  function get_dur_hh_mm(value) { return getValueDate(value, 2); };
+  function get_dur_hh_mm_ss(value) { return getValueDate(value, 3); };
+  function get_dd_mm_yy(value) { return getValueDate(value, 4); };
+  function get_dd_mm_yy_hh_mm(value) { return getValueDate(value, 5); };
+  function get_dd_mm_yy_hh_mm_ss(value) { return getValueDate(value, 6); };
+
+  function typesDate() { 
+    return createTypesDate().getTypesDate; 
   };
 
-  function get_hh_mm(value) {
-    return value;
-  };
-  
-  function get_hh_mm_ss(value) {
-    return value;
-  };
-  
-  function get_dur_hh_mm(value) {
-    return value;
-  };
-  
-  function get_dur_hh_mm_ss(value) {
-    return value;
-  };
-  
-  function get_dd_mm_yy(value) {
-    return value;
-  };
-  
-  function get_dd_mm_yy_hh_mm(value) {
-    return value;
-  };
-  
-  function get_dd_mm_yy_hh_mm_ss(value) {
-    return value;
+  function getValueDate(value, indexMask) {
+    const Commons = createCommons();
+
+    const num = Commons.filterValue(value, 'only-number');
+    const typeMask = Commons.getObjKeyForIndex(typesDate(), indexMask);
+    const mask = Commons.formatMask(num, typesDate()[typeMask].mask);
+
+    return mask;
   };
 
   return {
