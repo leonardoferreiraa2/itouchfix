@@ -29,12 +29,9 @@ export default function Signin() {
   melhorar criação de label
 
   FALTAM: 
-    number
-    string
-    validar cpf
-    validar cnpj
     validar data
     validar hora
+    validar duração
   
   FEITOS:
     cep
@@ -42,14 +39,16 @@ export default function Signin() {
     phone-ddd
     ramal
     plaque
-    cnpj
-    cpf
+    cnpj    validar cnpj
+    cpf     validar cpf
     date
+    string
+    number
 */
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
-      <Input name="data" type="[hh]:mm:ss" label="Data" />
+      <Input name="valor" type="currency" label="Valor R$" />
       <Input name="email" type="email" label="Email" />
       <Input name="numero" type="general" label="Número" />
       <Scope path="endereco">

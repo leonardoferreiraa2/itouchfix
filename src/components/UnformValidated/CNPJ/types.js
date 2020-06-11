@@ -4,7 +4,7 @@ import createCommons from '../Commons';
 
 function createTypesCNPJ() {
   const Commons = createCommons();
-  const mask = '99.999.999/9999-99';
+  const mask = '00.000.000/0000-00';
 
   const getTypesCNPJ = {
     'CNPJ': {

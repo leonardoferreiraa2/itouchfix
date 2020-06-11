@@ -4,7 +4,7 @@ import createCommons from '../Commons';
 
 function createTypesCep() {
   const Commons = createCommons();
-  const mask = '99.999-999';
+  const mask = '00.000-000';
 
   const getTypesCep = {
     'CEP': {

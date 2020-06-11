@@ -4,7 +4,7 @@ import createCommons from '../Commons';
 
 function createTypesCPF() {
   const Commons = createCommons();
-  const mask = '999.999.999-99';
+  const mask = '000.000.000-00';
 
   const getTypesCPF = {
     'CPF': {

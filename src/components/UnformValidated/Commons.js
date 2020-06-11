@@ -20,9 +20,10 @@ function createCommons() {
   };
 
   function filterValue(value, type, start, end) {
-    const strFind = letters_numbers[type];
     const setValue = start + end >= 0 ? value.substr(start, end) : value;
-  
+    const strFind = letters_numbers[type];
+    
+    //.replace(/[^\d]+/g,'') // somente números
     let newValue = '';
     for (let i = 0; i < setValue.length; i++) {
       if (strFind.indexOf(setValue[i].toUpperCase()) >= 0) {
@@ -39,7 +40,7 @@ function createCommons() {
 
     for (let i = 0; i < mask.length; i++) {
       if (l >= value.length || value === '') { break; }
-      if (mask[i] != 9) {
+      if (mask[i] != '0') {
         newValue += mask[i];
       } else {
         newValue += value[l];

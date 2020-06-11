@@ -4,11 +4,11 @@ import createCommons from '../Commons';
 
 function createTypesDate() {
   const Commons = createCommons();
-  const mask_hh_mm = '99:99';
-  const mask_hh_mm_ss = '99:99:99';
-  const mask_dd_mm_yy = '99/99/9999';
-  const mask_dd_mm_yy_hh_mm = '99/99/9999 99:99';
-  const mask_dd_mm_yy_hh_mm_ss = '99/99/9999 99:99:99';
+  const mask_hh_mm = '00:00';
+  const mask_hh_mm_ss = '00:00:00';
+  const mask_dd_mm_yy = '00/00/0000';
+  const mask_dd_mm_yy_hh_mm = '00/00/0000 00:00';
+  const mask_dd_mm_yy_hh_mm_ss = '00/00/0000 00:00:00';
 
   const getTypesDate = {
     'HH:MM': {

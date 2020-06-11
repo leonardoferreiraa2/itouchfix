@@ -4,7 +4,7 @@ import createCommons from '../Commons';
 
 function createTypesNumber() {
   const Commons = createCommons();
-  const mask_card = '9999 9999 9999 9999';
+  const mask_card = '0000 0000 0000 0000';
 
   const getTypesNumber = {
     'GENERAL': {
@@ -28,7 +28,7 @@ function createTypesNumber() {
       configInput: { 
         ...Commons.lblOrientacao, 
         keyboardType: 'numeric',
-        placeholder: '$0.00',
+        placeholder: 'R$0.00',
       },
     }, 
     'PERCENT': {
@@ -36,7 +36,7 @@ function createTypesNumber() {
       configInput: { 
         ...Commons.lblOrientacao, 
         keyboardType: Platform.OS === 'ios' ? 'decimal-pad' : 'numeric', 
-        placeholder: '%0.00', 
+        placeholder: '0.00', 
       },
     }, 
     'CARD': {

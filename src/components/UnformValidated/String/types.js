@@ -23,7 +23,7 @@ function createTypesString() {
       func: 'password',
       configInput: { 
         ...Commons.lblOrientacao, 
-        keyboardType: Platform.OS === 'ios' ? null : 'visible-password',
+        secureTextEntry: true,
         placeholder: '******',
       },
     },             
@@ -32,6 +32,7 @@ function createTypesString() {
       configInput: { 
         ...Commons.lblOrientacao, 
         keyboardType: 'email-address',
+        autoCapitalize: 'none',
         placeholder: 'Email',
       }
     }

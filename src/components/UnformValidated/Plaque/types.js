@@ -4,7 +4,7 @@ import createCommons from '../Commons';
 
 function createTypesPlaque() {
   const Commons = createCommons();
-  const mask = '999-9999';
+  const mask = '000-0000';
 
   const getTypesPlaque = {
     'PLAQUE': {

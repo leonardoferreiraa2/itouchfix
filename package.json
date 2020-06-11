@@ -12,6 +12,7 @@
   "dependencies": {
     "@unform/core": "^2.1.0",
     "@unform/mobile": "^2.1.0",
+    "intl": "^1.2.5",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },

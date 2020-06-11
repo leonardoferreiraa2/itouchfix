@@ -3,8 +3,8 @@ import createCommons from '../Commons';
 
 function createTypesPhone() {
   const Commons = createCommons();
-  const mask_phone = '9999-9999';
-  const mask_phone_ddd = '(99) 9999-9999';
+  const mask_phone = '0000-0000';
+  const mask_phone_ddd = '(00) 0000-0000';
 
   const getTypesPhone = {
     'PHONE': {
@@ -14,7 +14,7 @@ function createTypesPhone() {
         ...Commons.lblOrientacao, 
         maxLength: mask_phone.maxLength,
         keyboardType: 'numeric',
-        placeholder: '99999-9999',
+        placeholder: '00000-0000',
       },
     }, 
     'PHONE-DDD': {
@@ -24,7 +24,7 @@ function createTypesPhone() {
         ...Commons.lblOrientacao, 
         maxLength: mask_phone_ddd.maxLength,
         keyboardType: 'numeric',
-        placeholder: '(99) 99999-9999',
+        placeholder: '(00) 00000-0000',
       }
     }
   };
