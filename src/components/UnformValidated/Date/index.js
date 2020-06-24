@@ -19,11 +19,24 @@ function createDate() {
   function getValueDate(value, indexMask) {
     const Commons = createCommons();
 
+    // const num = getDigitos(Commons.filterValue(value, 'only-number'), dig);
     const num = Commons.filterValue(value, 'only-number');
     const typeMask = Commons.getObjKeyForIndex(typesDate(), indexMask);
     const mask = Commons.formatMask(num, typesDate()[typeMask].mask);
 
     return mask;
+  };
+
+  function getDigitos(value, dig) {
+    if (value === '') { return };
+
+    let newValue = parseInt(value);
+
+    newValue = newValue.length < dig
+      ? newValue 
+      : '0'.repeat(dig - String(newValue).length) + String(newValue); 
+
+    return String(newValue);
   };
 
   function validarData(date) {

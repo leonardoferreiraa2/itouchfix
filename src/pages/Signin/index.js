@@ -27,10 +27,8 @@ export default function Signin() {
   styles icones e label
   ver re-renders
   melhorar criação de label
-
+  
   FALTAM: 
-    validar data
-    validar hora
     validar duração
   
   FEITOS:
@@ -44,11 +42,13 @@ export default function Signin() {
     date
     string
     number
+    validar data
+    validar hora
 */
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
-      <Input name="valor" type="currency" label="Valor R$" />
+      <Input name="hora" type="hh:mm" label="Hora" />
       <Input name="email" type="email" label="Email" />
       <Input name="numero" type="general" label="Número" />
       <Scope path="endereco">
