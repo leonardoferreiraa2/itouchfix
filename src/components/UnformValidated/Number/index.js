@@ -69,7 +69,7 @@ function createNumber() {
       : '0'.repeat(numPass.length - 2) + '.00'; 
 
     return Commons.formatMask(numPass, typeMask);
-  }
+  };
 
   return {
     get_general,

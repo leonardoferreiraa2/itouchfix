@@ -16,7 +16,7 @@ function createTypesDate() {
       mask: mask_hh_mm,
       configInput: { 
         ...Commons.lblOrientacao, 
-        maxLength: mask_hh_mm.length,
+        maxLength: mask_hh_mm.length + 1,
         keyboardType: 'numeric',
         placeholder: 'hh:mm',
       },
