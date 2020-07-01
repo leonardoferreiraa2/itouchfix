@@ -19,9 +19,9 @@ function createDate() {
   function getValueDate(value, indexMask) {
     const Commons = createCommons();
 
-    const num = getDigitos(Commons.filterValue(value, 'only-number'), 2);
-    // const num = Commons.filterValue(value, 'only-number');
     const typeMask = Commons.getObjKeyForIndex(typesDate(), indexMask);
+    const func = typesDate()[typeMask].func;
+    const num = getDigitos(Commons.filterValue(value, 'only-number'), func);
     const mask = Commons.formatMask(num, typesDate()[typeMask].mask);
 
     return mask;
@@ -52,28 +52,52 @@ function createDate() {
     return Commons.formatMask(numPass, typeMask);
   }
 
-  function getDigitos(value) {
+  function getDigitos(value, func) {
     if (value === '') { return };
+    if (Object.keys(getDigitosHoras).indexOf(func) === -1) { return value };
 
-    let dig1, dig2;
-    let numInt = String(parseInt(value));
-    let newValue = value === '000' || value === '0000' ? 
-      value : numInt;
+    let numStr = String(parseInt(value));
+    let newStr = '';
 
-    if (newValue.length <= 3) {
-      dig1 = newValue.substr(0, 1);
-      dig2 = newValue.substr(1, 2);
-    } else if (newValue.length > 3) {
-      dig1 = newValue.substr(0, 2);
-      dig2 = newValue.substr(2, 2);
-    };
+    func = func.replace('dur_', '');
+    const getDig = getDigitosHoras[func];
+    const dig = getDig(numStr);
 
-    dig1 = dig1.length < 2 && value !== '0' ? 
-      '0'.repeat(2 - dig1.length) + dig1 : dig1; 
-    
-    newValue = dig1 + dig2;
+    for (let i = 0; i < dig.length; i++) {
+      if (i === 0) {
+        dig[i] = dig[i].length < 2 && value !== '0' ? 
+          '0'.repeat(2 - dig[i].length) + dig[i] : dig[i]; 
+      };
+ 
+      newStr += dig[i];
+    }
 
-    return newValue;
+    return newStr;
+  };
+
+  const getDigitosHoras = {
+    hh_mm(value) { 
+      let dig = [1];
+      if (value.length <= 3) {
+        dig[0] = value.substr(0, 1);
+        dig[1] = value.substr(1, 2);
+      } else if (value.length > 3) {
+        dig[0] = value.substr(0, 2);
+        dig[1] = value.substr(2, 2);
+      };
+      return dig;
+    },                
+    hh_mm_ss(value) { 
+      let dig = [2];
+      if (value.length <= 3) {
+        dig[0] = value.substr(0, 1);
+        dig[1] = value.substr(1, 2);
+      } else if (value.length > 3) {
+        dig[0] = value.substr(0, 2);
+        dig[1] = value.substr(2, 2);
+      };
+      return dig;
+    },                          
   };
 
   function validarData(date) {

@@ -49,7 +49,7 @@ export default function Signin() {
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
       <Input name="hora" type="hh:mm" label="Hora" />
-      <Input name="email" type="email" label="Email" />
+      <Input name="data" type="dd/mm/yyyy" label="Data" />
       <Input name="numero" type="general" label="Número" />
       <Scope path="endereco">
         <Input name="cep" type="cep" label="CEP" />
