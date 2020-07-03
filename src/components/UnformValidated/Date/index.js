@@ -27,33 +27,24 @@ function createDate() {
     return mask;
   };
 
-  function duracaoFormat(value, indexMask) {
-    const Commons = createCommons();
-    let num = Commons.filterValue(value, 'only-number');
-
-    // está apagando - se digitar 0, num e value vai ser 0, logo, segue
-    if (num === '00' || num === '' || (num === '0' && value !== '0')) { 
-      return '';
+  function duracaoFormat(value, func) {
+    if (!func.includes('dur_')) { return value; };
+    
+    let mask = '';
+    
+    if (func.length === 9) {
+        let len = value.substr(0, value.length - 2).length;
+        mask = value.length <= 4 ? '00:00' : '0'.repeat(len) + ':00';
+    } else if (func.length === 12) {
+        let len = value.substr(0, value.length - 4).length;
+        mask = value.length <= 6 ? '00:00:00' : '0'.repeat(len) + ':00:00';
     };
 
-    // essa conversão em inteiro é para tirar os zeros a esquerda
-    num = String(parseInt(num));
-
-    // o primeiro formato é quando tem até 3 caracteres
-    const numPass = num.length < 3 
-      ? '0'.repeat(3 - num.length) + String(num)
-      : String(num);
-    
-    // redimensiona de forma dinâmica a mask (ex: 124252 = 1242.52)
-    const typeMask = numPass.length === 3 
-      ? '0.00' 
-      : '0'.repeat(numPass.length - 2) + '.00'; 
-
-    return Commons.formatMask(numPass, typeMask);
+    return mask;
   }
 
   function getDigitos(value, func) {
-    if (value === '') { return };
+    if (value === '') { return '' };
     if (Object.keys(getDigitosHoras).indexOf(func) === -1) { return value };
 
     let numStr = String(parseInt(value));
@@ -62,6 +53,11 @@ function createDate() {
     func = func.replace('dur_', '');
     const getDig = getDigitosHoras[func];
     const dig = getDig(numStr);
+
+    if (value.substr(0, 2) === '00') { 
+      const len = dig.length === 2 ? 4 : 6;
+      return value.substr(0, len);
+    };
 
     for (let i = 0; i < dig.length; i++) {
       if (i === 0) {
@@ -85,17 +81,21 @@ function createDate() {
         dig[0] = value.substr(0, 2);
         dig[1] = value.substr(2, 2);
       };
+
       return dig;
     },                
     hh_mm_ss(value) { 
       let dig = [2];
-      if (value.length <= 3) {
+      if (value.length <= 5) {
         dig[0] = value.substr(0, 1);
         dig[1] = value.substr(1, 2);
-      } else if (value.length > 3) {
+        dig[2] = value.substr(3, 2);
+      } else if (value.length > 5) {
         dig[0] = value.substr(0, 2);
         dig[1] = value.substr(2, 2);
+        dig[2] = value.substr(4, 2);
       };
+
       return dig;
     },                          
   };
