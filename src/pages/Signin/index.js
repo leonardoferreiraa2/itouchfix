@@ -28,7 +28,7 @@ export default function Signin() {
   ver re-renders
   melhorar criação de label
  
-  FEITOS:
+   FEITOS:
     cep
     phone
     phone-ddd

@@ -128,11 +128,19 @@ function createDate() {
   };
 
   function validarHora(hour) {
-    if (hour.length !== 5 && hour.length !== 8) return false;
+    const isHour = hour.split(":").length - 1;
+    if (isHour < 1 || isHour > 2) { return false };
 
-    const h = parseInt(hour.substr(0, 2));
-    const m = parseInt(hour.substr(3, 2));
-    const s = parseInt(hour.substr(6, 4)) || 0;
+    let h, m, s;
+    if (hour.substr(0, hour.indexOf(':')).length > 2) {
+      h = 23;
+    } else {
+      h = parseInt(hour.substr(0, hour.indexOf(':')));
+    }
+
+    m = parseInt(hour.substr(hour.indexOf(':') + 1, hour.indexOf(':')));
+    s = parseInt(hour.substr(hour.indexOf(String(m)) + 
+      String(m).length + 1, hour.length)) || 0;
     
     if ( (h < 0 || h > 23) || (m < 0 || m > 59) || (s < 0 || s > 59) ) {
       return false;
