@@ -127,21 +127,24 @@ function createDate() {
     };
   };
 
-  function validarHora(hour) {
+  function validarHora(hour, dur) {
     const isHour = hour.split(":").length - 1;
     if (isHour < 1 || isHour > 2) { return false };
 
     let h, m, s;
-    if (hour.substr(0, hour.indexOf(':')).length > 2) {
+    // hour.substr(0, hour.indexOf(':')).length > 2 &&
+    if (dur == true) {
       h = 23;
     } else {
       h = parseInt(hour.substr(0, hour.indexOf(':')));
     }
 
-    m = parseInt(hour.substr(hour.indexOf(':') + 1, hour.indexOf(':')));
-    s = parseInt(hour.substr(hour.indexOf(String(m)) + 
-      String(m).length + 1, hour.length)) || 0;
-    
+    m = hour.substr(hour.split(':', 1).join(':').length + 1, 2) || -1;
+    m = m.length === 2 ? parseInt(m) : -1;
+
+    s = hour.substr(hour.split(':', 2).join(':').length + 1, 2);
+    s = isHour === 2 && s.length < 2 ? -1 : parseInt(s);
+
     if ( (h < 0 || h > 23) || (m < 0 || m > 59) || (s < 0 || s > 59) ) {
       return false;
     } else {
