@@ -6,8 +6,8 @@ import createTypesDate from './types';
 function createDate() {
   function get_hh_mm(value) { return getValueDate(value, 0); };
   function get_hh_mm_ss(value) { return getValueDate(value, 1); };
-  function get_dur_hh_mm(value) { return duracaoFormat(value, 2); };
-  function get_dur_hh_mm_ss(value) { return duracaoFormat(value, 3); };
+  function get_dur_hh_mm(value) { return getValueDate(value, 2); };
+  function get_dur_hh_mm_ss(value) { return getValueDate(value, 3); };
   function get_dd_mm_yy(value) { return getValueDate(value, 4); };
   function get_dd_mm_yy_hh_mm(value) { return getValueDate(value, 5); };
   function get_dd_mm_yy_hh_mm_ss(value) { return getValueDate(value, 6); };
@@ -22,35 +22,28 @@ function createDate() {
     const typeMask = Commons.getObjKeyForIndex(typesDate(), indexMask);
     const func = typesDate()[typeMask].func;
     const num = getDigitos(Commons.filterValue(value, 'only-number'), func);
-    const mask = Commons.formatMask(num, typesDate()[typeMask].mask);
+    const format = duracaoFormat(num, func) || typesDate()[typeMask].mask;
 
+    const mask = Commons.formatMask(num, format);
     return mask;
   };
 
-  function duracaoFormat(value, func) {
-    if (!func.includes('dur_')) { return value; };
-    
-    let mask = '';
-    
-    if (func.length === 9) {
-        let len = value.substr(0, value.length - 2).length;
-        mask = value.length <= 4 ? '00:00' : '0'.repeat(len) + ':00';
-    } else if (func.length === 12) {
-        let len = value.substr(0, value.length - 4).length;
-        mask = value.length <= 6 ? '00:00:00' : '0'.repeat(len) + ':00:00';
-    };
-
-    return mask;
-  }
-
   function getDigitos(value, func) {
     if (value === '') { return '' };
+
+    const dur = String(func).indexOf('dur_') > -1;
+    func = func.replace('dur_', '');
+
+    const dur_sem_second = dur && (value.length > 4 && func.length === 5);
+    const dur_com_second = dur && (value.length > 6 && func.length === 8);
+
+    if (dur_sem_second || dur_com_second) { return String(parseInt(value)) };
     if (Object.keys(getDigitosHoras).indexOf(func) === -1) { return value };
+
 
     let numStr = String(parseInt(value));
     let newStr = '';
 
-    func = func.replace('dur_', '');
     const getDig = getDigitosHoras[func];
     const dig = getDig(numStr);
 
@@ -99,6 +92,22 @@ function createDate() {
       return dig;
     },                          
   };
+
+  function duracaoFormat(value, func) {
+    if (String(func).indexOf('dur_') === -1) { return ''; };
+    
+    let mask = '';
+    
+    if (func.length === 9) {
+        let len = value.substr(0, value.length - 2).length;
+        mask = value.length <= 4 ? '00:00' : '0'.repeat(len) + ':00';
+    } else if (func.length === 12) {
+        let len = value.substr(0, value.length - 4).length;
+        mask = value.length <= 6 ? '00:00:00' : '0'.repeat(len) + ':00:00';
+    };
+
+    return mask;
+  }
 
   function validarData(date) {
     if (date.length < 10) return false;

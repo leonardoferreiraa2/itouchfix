@@ -27,10 +27,7 @@ export default function Signin() {
   styles icones e label
   ver re-renders
   melhorar criação de label
-  
-  FALTAM: 
-    validar duração
-  
+ 
   FEITOS:
     cep
     phone
@@ -44,11 +41,12 @@ export default function Signin() {
     number
     validar data
     validar hora
+    validar duração
 */
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
-      <Input name="hora" type="hh:mm" label="Hora" />
+      <Input name="hora" type="[hh]:mm:ss" label="Hora" />
       <Input name="data" type="dd/mm/yyyy" label="Data" />
       <Input name="numero" type="general" label="Número" />
       <Scope path="endereco">
