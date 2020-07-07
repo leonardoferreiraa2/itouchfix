@@ -109,6 +109,17 @@ function createDate() {
     return mask;
   }
 
+  function validarDataHora(dateHour) {
+    const data = dateHour.substr(0, 10);
+    const hora = dateHour.substr(11, dateHour.length);
+
+    const validData = validarData(data);
+    const validHora = validarHora(hora);
+    const validDataHora = validData && validHora ? true : false;
+
+    return validDataHora;
+  }
+
   function validarData(date) {
     if (date.length < 10) return false;
 

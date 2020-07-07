@@ -10,8 +10,8 @@ function createPhone() {
     const num = Commons.filterValue(value, 'only-number');
     let mask = '';
 
-    if (num.length === 9) {
-      mask = Commons.formatMask(num, '99999-9999');
+    if (num.length >= 9) {
+      mask = Commons.formatMask(num, '00000-0000');
     } else {
       const typeMask = Commons.getObjKeyForIndex(typesPhone(), 0);
       mask = Commons.formatMask(num, typesPhone()[typeMask].mask);
@@ -26,8 +26,8 @@ function createPhone() {
     const num = Commons.filterValue(value, 'only-number');
     let mask = '';
 
-    if (num.length === 11) {
-      mask = Commons.formatMask(num, '(99) 99999-9999');
+    if (num.length >= 11) {
+      mask = Commons.formatMask(num, '(00) 00000-0000');
     } else {
       const typeMask = Commons.getObjKeyForIndex(typesPhone(), 1);
       mask = Commons.formatMask(num, typesPhone()[typeMask].mask);
